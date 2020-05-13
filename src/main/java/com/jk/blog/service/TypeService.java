@@ -26,6 +26,8 @@ public interface TypeService {
 
     List<Type> listTypeTop(Integer size);
 
+    List<Type> listTypeBetween(Long id1, Long id2);
+
     Type updateType(Long id,Type type);
 
     void deleteType(Long id);

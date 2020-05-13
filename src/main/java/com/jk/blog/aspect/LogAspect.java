@@ -19,7 +19,7 @@ import java.util.Arrays;
  * @create: 2020-02-11 12:35
  **/
 @Aspect
-@Component  //springboot可以找到它
+@Component
 public class LogAspect {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());

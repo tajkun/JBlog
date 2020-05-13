@@ -2,6 +2,7 @@ package com.jk.blog.web;
 
 import com.jk.blog.NotFoundException;
 import com.jk.blog.service.BlogService;
+import com.jk.blog.service.BookService;
 import com.jk.blog.service.TagService;
 import com.jk.blog.service.TypeService;
 import com.jk.blog.vo.BlogQuery;
@@ -25,22 +26,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class IndexController {
 
-    @Autowired
-    private BlogService blogService;
+    private final BlogService blogService;
+    private final TypeService typeService;
+    private final TagService tagService;
+    private final BookService bookService;
 
     @Autowired
-    private TypeService typeService;
-
-    @Autowired
-    private TagService tagService;
+    public IndexController(BlogService blogService, TypeService typeService, TagService tagService, BookService bookService) {
+        this.blogService = blogService;
+        this.typeService = typeService;
+        this.tagService = tagService;
+        this.bookService = bookService;
+    }
 
     @GetMapping("/")
     public String index(@PageableDefault(size = 6, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
                         BlogQuery blog, Model model){
         model.addAttribute("page",blogService.listBlog(pageable));
-        model.addAttribute("types",typeService.listTypeTop(6));
+        model.addAttribute("bookPage", bookService.listBook(pageable));
+        model.addAttribute("type1",typeService.listTypeTop(7));
+        model.addAttribute("type2", typeService.listTypeBetween(8L, 15L));
+        model.addAttribute("type3", typeService.listTypeBetween(16L, 22L));
+        model.addAttribute("type4", typeService.listTypeBetween(23L, 28L));
+        model.addAttribute("type5", typeService.listTypeBetween(29L, 33L));
         model.addAttribute("tags",tagService.listTagTop(10));
-        model.addAttribute("recommendBlogs",blogService.listRecommendBlogTop(8));
+        model.addAttribute("recommendBooks", bookService.listRecommendBookTop(8));
         return "index";
     }
 

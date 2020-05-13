@@ -36,8 +36,8 @@ public class Blog {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateTime;
 
-    @ManyToOne
-    private Type type;
+//    @ManyToOne
+//    private Type type;
 
     @ManyToMany(cascade = {CascadeType.PERSIST})
     private List<Tag> tags = new ArrayList<>();
@@ -52,6 +52,9 @@ public class Blog {
     private String tagIds;
 
     private String description;
+
+    @ManyToOne
+    private Book book;
 
     public Blog() {
     }
@@ -160,12 +163,20 @@ public class Blog {
         this.updateTime = updateTime;
     }
 
-    public Type getType() {
-        return type;
+//    public Type getType() {
+//        return type;
+//    }
+//
+//    public void setType(Type type) {
+//        this.type = type;
+//    }
+
+    public Book getBook() {
+        return book;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setBook(Book book) {
+        this.book = book;
     }
 
     public List<Tag> getTags() {
@@ -247,12 +258,12 @@ public class Blog {
                 ", recommend=" + recommend +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
-                ", type=" + type +
                 ", tags=" + tags +
                 ", user=" + user +
                 ", comments=" + comments +
                 ", tagIds='" + tagIds + '\'' +
                 ", description='" + description + '\'' +
+                ", book=" + book +
                 '}';
     }
 }

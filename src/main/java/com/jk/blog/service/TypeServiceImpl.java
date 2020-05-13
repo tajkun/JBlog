@@ -58,9 +58,14 @@ public class TypeServiceImpl implements TypeService {
 
     @Override
     public List<Type> listTypeTop(Integer size) {
-        Sort sort = Sort.by(Sort.Direction.DESC,"blogs.size");
+        Sort sort = Sort.by(Sort.Direction.ASC,"id");
         Pageable pageable = PageRequest.of(0,size,sort);
         return typeRepository.findTop(pageable);
+    }
+
+    @Override
+    public List<Type> listTypeBetween(Long id1, Long id2) {
+        return typeRepository.findAllByIdBetween(id1, id2);
     }
 
     @Transactional

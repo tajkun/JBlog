@@ -22,8 +22,11 @@ public class Type {
     @NotBlank(message = "分类名称不能为空")    //后端校验
     private String name;
 
+//    @OneToMany(mappedBy = "type")
+//    private List<Blog> blogs = new ArrayList<>();
+
     @OneToMany(mappedBy = "type")
-    private List<Blog> blogs = new ArrayList<>();
+    private List<Book> books = new ArrayList<>();
 
     public Type() {
     }
@@ -44,12 +47,12 @@ public class Type {
         this.name = name;
     }
 
-    public List<Blog> getBlogs() {
-        return blogs;
+    public List<Book> getBooks() {
+        return books;
     }
 
-    public void setBlogs(List<Blog> blogs) {
-        this.blogs = blogs;
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 
     @Override
@@ -57,6 +60,8 @@ public class Type {
         return "Type{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", books=" + books +
                 '}';
     }
+
 }

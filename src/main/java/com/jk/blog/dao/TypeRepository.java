@@ -19,4 +19,6 @@ public interface TypeRepository extends JpaRepository<Type,Long> {
 
     @Query("select t from Type t")
     List<Type> findTop(Pageable pageable);
+
+    List<Type> findAllByIdBetween(Long id, Long id2);
 }
