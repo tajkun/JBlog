@@ -32,4 +32,6 @@ public interface BookService {
 
     Long countBook();
 
+    Page<Book> listBook(String query, Pageable pageable);
+
 }

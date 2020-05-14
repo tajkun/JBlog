@@ -31,4 +31,7 @@ public interface BookRepository extends JpaRepository<Book,Long> {
     @Query("select b from Book b where function('date_format',b.updateTime,'%Y') = ?1")
     List<Book> findByYear(String year);
 
+    @Query("select b from Book b where b.title like ?1")
+    Page<Book> findBookByQuery(String query, Pageable pageable);
+
 }

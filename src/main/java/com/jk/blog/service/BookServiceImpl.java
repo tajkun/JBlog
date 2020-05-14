@@ -69,4 +69,9 @@ public class BookServiceImpl implements BookService {
         return bookRepository.count();
     }
 
+    @Override
+    public Page<Book> listBook(String query, Pageable pageable) {
+        return bookRepository.findBookByQuery(query, pageable);
+    }
+
 }

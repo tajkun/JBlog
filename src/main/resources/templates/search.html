@@ -36,67 +36,131 @@
   </nav>
 
   <!-- 中间内容 -->
-  <div class="m-container-small m-padded-tb-huge">
+  <div class="m-container m-padded-tb-huge animated fadeIn">
       <div class="ui container">
-            <!--header-->
-          <div class="ui top attached segment">
-              <div class="ui middle aligned two column grid">
-                  <div class="column">
-                      <h3 class="ui violet header">搜索结果</h3>
-                  </div>
-                  <div class="right aligned column">
-                      共<h2 class="ui orange header m-inline-block m-text-thin" th:text="${page.totalElements}">14</h2>篇
-                  </div>
-              </div>
-          </div>
+          <!--header-->
+          <h4 class="ui horizontal divider header">
+              <i class="search icon"></i>
+              &nbsp;&nbsp;&nbsp;&nbsp;共  &nbsp;<span class="ui header" th:text="${bookPage.totalElements}">14</span>&nbsp;&nbsp;条搜索结果
+          </h4>
+          <br>
+          <div class="ui stackable grid">
+              <!-- 左边博客列表 -->
+              <div class="eleven wide column active">
+                  <!-- header -->
+<!--                  <div class="ui top attached segment">-->
+<!--                      <div class="ui middle aligned two column grid">-->
+<!--                          <div class="column">-->
+<!--                              <h3 class="ui violet header" >阅读排行</h3>-->
+<!--                          </div>-->
+<!--                          <div class="right aligned column">-->
+<!--                              共&nbsp;<h2 class="ui header m-inline-block m-text-thin" >14</h2>&nbsp;本-->
+<!--                          </div>-->
+<!--                      </div>-->
+<!--                  </div>-->
 
-
-          <div class="ui violet top attached segment">
-              <div class="ui m-padded vertical segment m-padded-tb-large" th:each="blog : ${page.content}">
-                  <div class="ui middle aligned mobile reversed stackable grid" >
-                      <div class="eleven wide column">
-                          <h3 class="ui header"><a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="m-black" th:text="${blog.title}">你真的理解什么是财富自由吗？</a></h3>
-                          <p class="m-text" th:text="|${blog.description}......|">在你决定踏上财富自由的路之前，你要先想清楚，这件事真正的意义是什么；如果你真的“想要”财富自由，那么你就需要理解“财富自由”，直到你把这个概念理解得像吃饭睡觉一样透彻之后，你才有了可以加速向它靠近的前提</p>
-                          <div class="ui grid">
-                              <div class="eleven wide column">
-                                  <div class="ui mimi horizontal link list">
-                                      <div class="item">
-                                          <img src="https://picsum.photos/id/1002/100/100" th:src="@{${blog.user.avatar}}" alt="" class="ui avatar image">
-                                          <div class="content"><a href="#" class="header" th:text="${blog.user.nickname}">贾坤</a></div>
-                                      </div>
-                                      <div class="item">
-                                          <i class="calendar icon"></i><span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2020-02-04</span>
-                                      </div>
-                                      <div class="item">
-                                          <i class="eye icon"></i><span th:text="${blog.views}">123</span>
+                  <!-- content 书籍展示 -->
+                  <div class="ui attached segment">
+                      <div class="ui vertical segment " >
+                          <div class="ui middle aligned mobile reversed stackable grid"  >
+                              <div class="five wide column" th:each="book : ${bookPage.content}">
+                                  <div class="ui card" >
+                                      <a class="image" href="#" th:href="@{/book/{id}(id=${book.id})}">
+                                          <img src="https://picsum.photos/id/1/480/640" th:src="@{${book.picture}}">
+                                      </a>
+                                      <div class="content">
+                                          <a class="header" href="#" th:text="${book.title}">Steve Jobes</a>
+                                          <div class="meta">
+                                              <a th:text="${book.author}">Last Seen 2 days ago</a>
+                                          </div>
                                       </div>
                                   </div>
                               </div>
-                              <div class="right aligned five wide column">
-                                  <a href="#" target="_blank" class="ui violet basic label m-padded-mini m-text-thin" th:text="${blog.type.name}">认知升级</a>
-                              </div>
+
                           </div>
                       </div>
-                      <div class="five wide column">
-                          <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank">
-                              <img src="https://picsum.photos/id/1002/800/450" th:src="@{${blog.firstPicture}}" alt="" class="ui rounded image">
-                          </a>
+
+                  </div>
+
+                  <!-- bottom页码 -->
+                  <div class="ui bottom attached segment" th:if="${bookPage.totalPages}>1">
+                      <div class="ui middle aligned two column grid">
+                          <div class="column">
+                              <a href="#" th:href="@{/(page=${page.number}-1)}" th:unless="${page.first}" class="ui mini violet basic button">上一页</a>
+                          </div>
+                          <div class="right aligned column">
+                              <a href="#" th:href="@{/(page=${page.number}+1)}" th:unless="${page.last}" class="ui mini violet basic button">下一页</a>
+                          </div>
                       </div>
                   </div>
               </div>
-          </div>
 
-          <div class="ui bottom attached segment" th:if="${page.totalPages}>1">
-              <div class="ui middle aligned two column grid">
-                  <div class="column">
-                      <a href="#" th:href="@{/(page=${page.number}-1)}" th:unless="${page.first}" class="ui mini violet basic button">上一页</a>
-                  </div>
-                  <div class="right aligned column">
-                      <a href="#" th:href="@{/(page=${page.number}+1)}" th:unless="${page.last}" class="ui mini violet basic button">下一页</a>
-                  </div>
-              </div>
+
+              <!-- 右边布局 -->
+
           </div>
       </div>
+
+<!--      <div class="ui container">-->
+<!--            &lt;!&ndash;header&ndash;&gt;-->
+<!--          <div class="ui top attached segment">-->
+<!--              <div class="ui middle aligned two column grid">-->
+<!--                  <div class="column">-->
+<!--                      <h3 class="ui violet header">搜索结果</h3>-->
+<!--                  </div>-->
+<!--                  <div class="right aligned column">-->
+<!--                      共<h2 class="ui orange header m-inline-block m-text-thin" th:text="${page.totalElements}">14</h2>篇-->
+<!--                  </div>-->
+<!--              </div>-->
+<!--          </div>-->
+
+
+<!--          <div class="ui violet top attached segment">-->
+<!--              <div class="ui m-padded vertical segment m-padded-tb-large" th:each="blog : ${page.content}">-->
+<!--                  <div class="ui middle aligned mobile reversed stackable grid" >-->
+<!--                      <div class="eleven wide column">-->
+<!--                          <h3 class="ui header"><a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="m-black" th:text="${blog.title}">你真的理解什么是财富自由吗？</a></h3>-->
+<!--                          <p class="m-text" th:text="|${blog.description}......|">在你决定踏上财富自由的路之前，你要先想清楚，这件事真正的意义是什么；如果你真的“想要”财富自由，那么你就需要理解“财富自由”，直到你把这个概念理解得像吃饭睡觉一样透彻之后，你才有了可以加速向它靠近的前提</p>-->
+<!--                          <div class="ui grid">-->
+<!--                              <div class="eleven wide column">-->
+<!--                                  <div class="ui mimi horizontal link list">-->
+<!--                                      <div class="item">-->
+<!--                                          <img src="https://picsum.photos/id/1002/100/100" th:src="@{${blog.user.avatar}}" alt="" class="ui avatar image">-->
+<!--                                          <div class="content"><a href="#" class="header" th:text="${blog.user.nickname}">贾坤</a></div>-->
+<!--                                      </div>-->
+<!--                                      <div class="item">-->
+<!--                                          <i class="calendar icon"></i><span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2020-02-04</span>-->
+<!--                                      </div>-->
+<!--                                      <div class="item">-->
+<!--                                          <i class="eye icon"></i><span th:text="${blog.views}">123</span>-->
+<!--                                      </div>-->
+<!--                                  </div>-->
+<!--                              </div>-->
+<!--                              <div class="right aligned five wide column">-->
+<!--                                  <a href="#" target="_blank" class="ui violet basic label m-padded-mini m-text-thin" th:text="${blog.type.name}">认知升级</a>-->
+<!--                              </div>-->
+<!--                          </div>-->
+<!--                      </div>-->
+<!--                      <div class="five wide column">-->
+<!--                          <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank">-->
+<!--                              <img src="https://picsum.photos/id/1002/800/450" th:src="@{${blog.firstPicture}}" alt="" class="ui rounded image">-->
+<!--                          </a>-->
+<!--                      </div>-->
+<!--                  </div>-->
+<!--              </div>-->
+<!--          </div>-->
+
+<!--          <div class="ui bottom attached segment" th:if="${page.totalPages}>1">-->
+<!--              <div class="ui middle aligned two column grid">-->
+<!--                  <div class="column">-->
+<!--                      <a href="#" th:href="@{/(page=${page.number}-1)}" th:unless="${page.first}" class="ui mini violet basic button">上一页</a>-->
+<!--                  </div>-->
+<!--                  <div class="right aligned column">-->
+<!--                      <a href="#" th:href="@{/(page=${page.number}+1)}" th:unless="${page.last}" class="ui mini violet basic button">下一页</a>-->
+<!--                  </div>-->
+<!--              </div>-->
+<!--          </div>-->
+<!--      </div>-->
   </div>
 
   <br>

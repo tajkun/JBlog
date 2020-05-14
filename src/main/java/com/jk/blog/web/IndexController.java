@@ -88,7 +88,7 @@ public class IndexController {
     @PostMapping("/search")
     public String search(@PageableDefault(size = 6, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
                          @RequestParam String query, Model model) {
-        model.addAttribute("page",blogService.listBlog("%"+query+"%",pageable));
+        model.addAttribute("bookPage",bookService.listBook("%"+query+"%",pageable));
         model.addAttribute("query",query);
         return "search";
     }
