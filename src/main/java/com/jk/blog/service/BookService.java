@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @program: blog
@@ -26,5 +27,9 @@ public interface BookService {
 //    Page<Book> listBook(String query,Pageable pageable);
 
     List<Book> listRecommendBookTop(Integer size);
+
+    Map<String,List<Book>> archiveBook();
+
+    Long countBook();
 
 }

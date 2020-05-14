@@ -1,6 +1,7 @@
 package com.jk.blog.service;
 
 import com.jk.blog.dao.BookRepository;
+import com.jk.blog.po.Blog;
 import com.jk.blog.po.Book;
 import com.jk.blog.po.Type;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @program: blog
@@ -50,4 +53,20 @@ public class BookServiceImpl implements BookService {
         Pageable pageable = PageRequest.of(0,size,sort);
         return bookRepository.findTop(pageable);
     }
+
+    @Override
+    public Map<String, List<Book>> archiveBook() {
+        List<String> years = bookRepository.findGroupYear();
+        Map<String,List<Book>> map = new HashMap<>();
+        for (String year : years) {
+            map.put(year,bookRepository.findByYear(year));
+        }
+        return map;
+    }
+
+    @Override
+    public Long countBook() {
+        return bookRepository.count();
+    }
+
 }

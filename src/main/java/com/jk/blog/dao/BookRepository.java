@@ -25,4 +25,10 @@ public interface BookRepository extends JpaRepository<Book,Long> {
     @Query("select b from Book b where b.recommend = true")
     List<Book> findTop(Pageable pageable);
 
+    @Query("select function('date_format',b.updateTime,'%Y') as year from Book b group by function('date_format',b.updateTime,'%Y') order by year desc ")
+    List<String> findGroupYear();
+
+    @Query("select b from Book b where function('date_format',b.updateTime,'%Y') = ?1")
+    List<Book> findByYear(String year);
+
 }
