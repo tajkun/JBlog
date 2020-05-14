@@ -1,6 +1,7 @@
 package com.jk.blog.web;
 
 import com.jk.blog.NotFoundException;
+import com.jk.blog.po.Book;
 import com.jk.blog.service.BlogService;
 import com.jk.blog.service.BookService;
 import com.jk.blog.service.TagService;
@@ -73,4 +74,41 @@ public class IndexController {
         model.addAttribute("newblogs", blogService.listRecommendBlogTop(3));
         return "_fragments :: newblogList";
     }
+
+    @GetMapping("/book/{id}")
+    public String book(@PathVariable Long id,Model model) {
+        Book book = bookService.getBookById(id);
+//        String description = toHTMLString(book.getDescription());
+//        book.setDescription(description);
+        model.addAttribute("book", book);
+        model.addAttribute("articles", blogService.listBlogByBook(book));
+        return "book";
+    }
+
+    public static String toHTMLString(String in)
+    {
+        StringBuffer out = new StringBuffer();
+        for(int i = 0; in != null && i < in.length(); i++)
+        {
+            char  c  =  in.charAt(i);
+            if  (c  ==  '\'')
+                out.append("&#039;");
+            else  if   (c == '\"')
+                out.append("&#034;");
+            else  if   (c == '<')
+                out.append("&lt;");
+            else  if   (c == '>')
+                out.append("&gt;");
+            else  if   (c == '&')
+                out.append("&amp;");
+            else  if   (c == ' ')
+                out.append("&nbsp;");
+            else  if  (c  ==  '\n')
+                out.append("<br>");
+            else
+                out.append(c);
+        }
+        return  out.toString();
+    }
+
 }

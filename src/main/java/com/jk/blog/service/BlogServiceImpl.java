@@ -3,6 +3,7 @@ package com.jk.blog.service;
 import com.jk.blog.NotFoundException;
 import com.jk.blog.dao.BlogRepository;
 import com.jk.blog.po.Blog;
+import com.jk.blog.po.Book;
 import com.jk.blog.po.Type;
 import com.jk.blog.util.MarkdownUtils;
 import com.jk.blog.util.MyBeanUtils;
@@ -97,9 +98,10 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public List<Blog> listBlogByBookId(Long bookId) {
-        return blogRepository.findByBook(bookId);
+    public List<Blog> listBlogByBook(Book book) {
+        return blogRepository.findAllByBook(book);
     }
+
 
     @Override
     public List<Blog> listRecommendBlogTop(Integer size) {
@@ -153,4 +155,5 @@ public class BlogServiceImpl implements BlogService {
     public void deleteBlog(Long id) {
         blogRepository.deleteById(id);
     }
+
 }

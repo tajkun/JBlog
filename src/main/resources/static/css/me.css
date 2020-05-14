@@ -29,6 +29,10 @@ body{
     padding-left: 4em !important;
     padding-right: 4em !important;
 }
+.m-padded-lr-huge{
+    padding-left: 12em !important;
+    padding-right: 12em !important;
+}
 .m-padded{
     padding-left: 2em !important;
     padding-right: 2em !important;
@@ -46,10 +50,36 @@ body{
 
 
 /* 字体设置 */
+pre {
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+
+    white-space: -o-pre-wrap;
+    *word-wrap: break-word;
+    *white-space : normal ;
+}
+
 .m-text{
     font-weight: 300 !important;
     letter-spacing: 1px !important;
     line-height: 1.8;
+}
+.m-text-book-des{
+    font-weight: 300 !important;
+    letter-spacing: 1px !important;
+    line-height: 1.9;
+}
+.m-text-book-title{
+    font-weight: 400 !important;
+    letter-spacing: 1px !important;
+    line-height: 1.8;
+    font-size: 24px !important;
+}
+.m-text-book{
+    font-weight: 300 !important;
+    letter-spacing: 0.5px !important;
+    line-height: 1.8;
+    font-size: 15px !important;
 }
 .m-text-thin{
     font-weight: 300 !important;
@@ -122,6 +152,9 @@ body{
     margin-bottom: 0.5em !important;
 }
 
+.m-margin-l-huge{
+    margin-left: 5em !important;
+}
 .m-margin-l-mini{
     margin-left: 1.5em !important;
 }

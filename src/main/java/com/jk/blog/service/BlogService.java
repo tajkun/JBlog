@@ -1,6 +1,7 @@
 package com.jk.blog.service;
 
 import com.jk.blog.po.Blog;
+import com.jk.blog.po.Book;
 import com.jk.blog.vo.BlogQuery;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,7 +29,7 @@ public interface BlogService {
 
     Page<Blog> listBlog(String query, Pageable pageable);
 
-    List<Blog> listBlogByBookId(Long bookId);
+    List<Blog> listBlogByBook(Book book);
 
     List<Blog> listRecommendBlogTop(Integer size);
 

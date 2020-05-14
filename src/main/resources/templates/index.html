@@ -59,11 +59,11 @@
                         <div class="ui middle aligned mobile reversed stackable grid"  >
                             <div class="five wide column" th:each="book : ${bookPage.content}">
                                 <div class="ui card" >
-                                    <a class="image" href="card.php#">
+                                    <a class="image" href="card.php#" th:href="@{/book/{id}(id=${book.id})}">
                                         <img src="https://picsum.photos/id/1/480/640" th:src="@{${book.picture}}">
                                     </a>
                                     <div class="content">
-                                        <a class="header" href="card.php#" th:text="${book.title}">Steve Jobes</a>
+                                        <a class="header" href="#" th:text="${book.title}">Steve Jobes</a>
                                         <div class="meta">
                                             <a th:text="${book.author}">Last Seen 2 days ago</a>
                                         </div>
@@ -98,68 +98,11 @@
                                 </div>
                             </div>
                             <!--*/-->
-<!--                            <div class="eleven wide column">-->
-<!--                                <h3 class="ui header"><a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="m-black" th:text="${blog.title}">你真的理解什么是财富自由吗？</a></h3>-->
-<!--                                <p class="m-text" th:text="|${blog.description}......|">在你决定踏上财富自由的路之前，你要先想清楚，这件事真正的意义是什么；如果你真的“想要”财富自由，那么你就需要理解“财富自由”，直到你把这个概念理解得像吃饭睡觉一样透彻之后，你才有了可以加速向它靠近的前提</p>-->
-<!--                                <div class="ui grid">-->
-<!--                                    <div class="eleven wide column">-->
-<!--                                        <div class="ui mimi horizontal link list">-->
-<!--                                            <div class="item">-->
-<!--                                                <img src="https://picsum.photos/id/1002/100/100" th:src="@{${blog.user.avatar}}" alt="" class="ui avatar image">-->
-<!--                                                <div class="content"><a href="#" class="header" th:text="${blog.user.nickname}">贾坤</a></div>-->
-<!--                                            </div>-->
-<!--                                            <div class="item">-->
-<!--                                                <i class="calendar icon"></i><span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2020-02-04</span>-->
-<!--                                            </div>-->
-<!--                                            <div class="item">-->
-<!--                                                <i class="eye icon"></i><span th:text="${blog.views}">123</span>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <div class="right aligned five wide column">-->
-<!--&lt;!&ndash;                                        <a href="#" target="_blank" class="ui violet basic label m-padded-mini m-text-thin" th:text="${blog.type.name}">认知升级</a>&ndash;&gt;-->
-<!--                                        <a href="#" target="_blank" class="ui violet basic label m-padded-mini m-text-thin" >认知升级</a>-->
 
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="five wide column">-->
-<!--                                <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank">-->
-<!--                                    <img src="https://picsum.photos/id/1002/800/450" th:src="@{${blog.firstPicture}}" alt="" class="ui rounded image">-->
-<!--                                </a>-->
-<!--                            </div>-->
                         </div>
                     </div>
 
-<!--               <div class="ui grid">-->
-<!--                   <div class="four wide column">-->
-<!--                       <div class="ui card" style="color: #0000C0">-->
-<!--                           <a class="image" href="card.php#">-->
-<!--                               <img src="https://picsum.photos/id/1/800/500">-->
-<!--                           </a>-->
-<!--                           <div class="content">-->
-<!--                               <a class="header" href="card.php#">Steve Jobes</a>-->
-<!--                               <div class="meta">-->
-<!--                                   <a>Last Seen 2 days ago</a>-->
-<!--                               </div>-->
-<!--                           </div>-->
-<!--                       </div>-->
-<!--                   </div>-->
-<!--                   <div class="four wide column">-->
-<!--                       <div class="ui card" style="color: #0000C0">-->
-<!--                           <a class="image" href="card.php#">-->
-<!--                               <img src="https://picsum.photos/id/1/800/500">-->
-<!--                           </a>-->
-<!--                           <div class="content">-->
-<!--                               <a class="header" href="card.php#">Steve Jobes</a>-->
-<!--                               <div class="meta">-->
-<!--                                   <a>Last Seen 2 days ago</a>-->
-<!--                               </div>-->
-<!--                           </div>-->
-<!--                       </div>-->
-<!--                   </div>-->
 
-<!--               </div>-->
 
                </div>
 
@@ -175,6 +118,8 @@
                    </div>
                </div>
            </div>
+
+
 
            <!-- 右边布局 -->
            <div class="five wide column">
@@ -203,7 +148,7 @@
                                     經部
                                 </div>
                                 <div class="content">
-                                    <a href="#" th:href="@{/types/{id}(id=${type.id})}" class="item" th:each="type : ${type1}">
+                                    <a href="#"  data-tab="1" class="item" th:each="type : ${type1}">
                                         <span th:text="${type.name}">詩類</span>
                                         <div class="ui violet basic left pointing label" th:text="${#arrays.length(type.books)}">13</div>
                                     </a>
@@ -219,6 +164,7 @@
                                     </a>
                                     <!--*/-->
                                 </div>
+
 
                                 <div class="title">
                                     <i class="dropdown icon"></i>
@@ -414,6 +360,9 @@
       //     });
       $('.ui.accordion').accordion();
 
+      $('.content .item')
+          .tab()
+      ;
   </script>
 </body>
 </html>

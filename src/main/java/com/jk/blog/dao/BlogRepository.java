@@ -1,6 +1,7 @@
 package com.jk.blog.dao;
 
 import com.jk.blog.po.Blog;
+import com.jk.blog.po.Book;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -27,7 +28,7 @@ public interface BlogRepository extends JpaRepository<Blog,Long>, JpaSpecificati
 
 //    @Query("select b from Blog b where b.book like ?1 ")
 //    Page<Blog> findByBookId(String query, Pageable pageable);
-    List<Blog> findByBook(Long bookId);
+    List<Blog> findAllByBook(Book book);
 
     @Transactional
     @Modifying
