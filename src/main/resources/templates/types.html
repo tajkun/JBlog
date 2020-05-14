@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <!--  移动端适配  -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>分类</title>
+    <title>书籍分类</title>
     <!--  cdn方式引入semantic UI  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
     <!-- 引入自定义的css -->
@@ -36,232 +36,172 @@
   </nav>
 
   <!-- 中间内容 -->
-  <div class="m-container-small m-padded-tb-huge">
+  <div class="m-container m-padded-tb-huge animated fadeIn">
       <div class="ui container">
             <!--header-->
-          <div class="ui top attached segment">
-              <div class="ui middle aligned two column grid">
-                  <div class="column">
-                      <h3 class="ui violet header">分 类</h3>
+          <h4 class="ui horizontal divider header">
+              <i class="book icon"></i>
+              &nbsp;&nbsp;&nbsp;&nbsp;共 <span class="ui header" >4</span> 大类 &nbsp; <span class="ui header" th:text="${#arrays.length(types)}">14</span> 小类
+          </h4>
+<!--          <div class="ui attached segment m-padded-tb-large">-->
+<!--              <div class="ui labeled button m-margin-tb-tiny m-margin-l-tiny" th:each="type : ${types}">-->
+<!--                  <a href="#" th:href="@{/types/{id}(id=${type.id})}" class="ui button" th:classappend="${type.id==activeTypeId} ? 'violet'" th:text="${type.name}">思考与感悟</a>-->
+<!--                  <div class="ui basic left pointing label" th:classappend="${type.id==activeTypeId} ? 'violet'" th:text="${#arrays.length(type.books)}">12</div>-->
+<!--              </div>-->
+
+<!--          </div>-->
+          <br>
+          <div class="ui stackable grid">
+          <!-- 左边博客列表 -->
+          <div class="eleven wide column active">
+              <!-- header -->
+              <div class="ui top attached segment">
+                  <div class="ui middle aligned two column grid">
+                      <div class="column">
+                          <h3 class="ui violet header" th:text="${typeStr}">阅读排行</h3>
+                      </div>
+                      <div class="right aligned column">
+                          共&nbsp;<h2 class="ui header m-inline-block m-text-thin" th:text="${bookPage.totalElements}">14</h2>&nbsp;本
+                      </div>
                   </div>
-                  <div class="right aligned column">
-                      共 <h2 class="ui orange header m-inline-block m-text-thin" th:text="${#arrays.length(types)}">14</h2> 个
+              </div>
+
+              <!-- content 书籍展示 -->
+              <div class="ui attached segment">
+                  <div class="ui vertical segment " >
+                      <div class="ui middle aligned mobile reversed stackable grid"  >
+                          <div class="five wide column" th:each="book : ${bookPage.content}">
+                              <div class="ui card" >
+                                  <a class="image" href="#" th:href="@{/book/{id}(id=${book.id})}">
+                                      <img src="https://picsum.photos/id/1/480/640" th:src="@{${book.picture}}">
+                                  </a>
+                                  <div class="content">
+                                      <a class="header" href="#" th:text="${book.title}">Steve Jobes</a>
+                                      <div class="meta">
+                                          <a th:text="${book.author}">Last Seen 2 days ago</a>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+
+                      </div>
+                  </div>
+
+
+
+              </div>
+
+              <!-- bottom页码 -->
+              <div class="ui bottom attached segment" th:if="${bookPage.totalPages}>1">
+                  <div class="ui middle aligned two column grid">
+                      <div class="column">
+                          <a href="#" th:href="@{/(page=${page.number}-1)}" th:unless="${page.first}" class="ui mini violet basic button">上一页</a>
+                      </div>
+                      <div class="right aligned column">
+                          <a href="#" th:href="@{/(page=${page.number}+1)}" th:unless="${page.last}" class="ui mini violet basic button">下一页</a>
+                      </div>
                   </div>
               </div>
-          </div>
-          <div class="ui attached segment m-padded-tb-large">
-              <div class="ui labeled button m-margin-tb-tiny m-margin-l-tiny" th:each="type : ${types}">
-                  <a href="#" th:href="@{/types/{id}(id=${type.id})}" class="ui button" th:classappend="${type.id==activeTypeId} ? 'violet'" th:text="${type.name}">思考与感悟</a>
-                  <div class="ui basic left pointing label" th:classappend="${type.id==activeTypeId} ? 'violet'" th:text="${#arrays.length(type.blogs)}">12</div>
-              </div>
-<!--
-              <div class="ui labeled button m-margin-tb-tiny">
-                  <a href="#" class="ui basic button">思考与感悟</a>
-                  <div class="ui basic left pointing label">12</div>
-              </div>
-              <div class="ui labeled button m-margin-tb-tiny">
-                  <a href="#" class="ui basic button">思考与感悟</a>
-                  <div class="ui basic left pointing label">12</div>
-              </div>
-              <div class="ui labeled button m-margin-tb-tiny">
-                  <a href="#" class="ui basic button">思考与感悟</a>
-                  <div class="ui basic left pointing label">12</div>
-              </div>
-              <div class="ui labeled button m-margin-tb-tiny">
-                  <a href="#" class="ui basic button">思考与感悟</a>
-                  <div class="ui basic left pointing label">12</div>
-              </div>
-              <div class="ui labeled button m-margin-tb-tiny">
-                  <a href="#" class="ui basic button">开发手册</a>
-                  <div class="ui basic left pointing label">12</div>
-              </div>
-              <div class="ui labeled button m-margin-tb-tiny">
-                  <a href="#" class="ui basic button">开发手册</a>
-                  <div class="ui basic left pointing label">12</div>
-              </div>
-              <div class="ui labeled button m-margin-tb-tiny">
-                  <a href="#" class="ui basic button">开发手册</a>
-                  <div class="ui basic left pointing label">12</div>
-              </div>
-             -->
           </div>
 
-          <div class="ui violet top attached segment">
-              <div class="ui padded vertical segment m-padded-tb-large" th:each="blog : ${page.content}">
-                  <div class="ui middle aligned mobile reversed stackable grid" >
-                      <div class="eleven wide column">
-                          <h3 class="ui header" ><a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="m-black" th:text="${blog.title}">你真的理解什么是财富自由吗?</a></h3>
-                          <p class="m-text" th:text="|${blog.description}......|">正确做好任何一件事情的前提是清晰、正确的理解目标。而事实是，我们很多人很多时候根本没有对目标正确的定义，甚至根本从来就没有想过，只是大家都那么做而已…...</p>
-                          <div class="ui grid">
-                              <div class="eleven wide column">
-                                  <div class="ui mini horizontal link list">
-                                      <div class="item">
-                                          <img src="https://unsplash.it/100/100?image=1005" th:src="@{${blog.user.avatar}}"  alt="" class="ui avatar image">
-                                          <div class="content"><a href="#" class="header" th:text="${blog.user.nickname}" >李仁密</a></div>
-                                      </div>
-                                      <div class="item">
-                                          <i class="calendar icon"></i><span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2017-10-01</span>
-                                      </div>
-                                      <div class="item">
-                                          <i class="eye icon"></i> <span th:text="${blog.views}">2342</span>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="right aligned five wide column">
-                                  <a href="#" target="_blank" class="ui violet label m-padded-tiny m-text-thin" th:text="${blog.type.name}">认知升级</a>
-                              </div>
-                          </div>
-                      </div>
 
-                      <div class="five wide column">
-                          <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank">
-                              <img src="https://unsplash.it/800/450?image=1005" th:src="@{${blog.firstPicture}}"  alt="" class="ui rounded image">
-                          </a>
-                      </div>
+          <!-- 右边布局 -->
+          <div class="five wide column">
+              <!-- 分类 -->
+              <div class="ui segments">
+                  <div class="ui secondary segment">
+                      <div class="ui two column grid">
+                          <div class="column">
+                              <i class="idea icon"></i><span class="m-text-color">分类详情</span>
+                          </div>
 
+                      </div>
                   </div>
-              </div>
-<!--
-              <div class="ui m-padded vertical segment m-padded-tb-large m-mobile-clear">
-                  <div class="ui mobile reversed stackable grid">
-                      <div class="eleven wide column">
-                          <h3 class="ui header">你真的理解什么是财富自由吗？</h3>
-                          <p class="m-text">在你决定踏上财富自由的路之前，你要先想清楚，这件事真正的意义是什么；如果你真的“想要”财富自由，那么你就需要理解“财富自由”，直到你把这个概念理解得像吃饭睡觉一样透彻之后，你才有了可以加速向它靠近的前提</p>
-                          <div class="ui stackable grid">
-                              <div class="eleven wide column">
-                                  <div class="ui mimi horizontal link list">
-                                      <div class="item">
-                                          <img src="https://picsum.photos/id/1002/100/100" alt="" class="ui avatar image">
-                                          <div class="content"><a href="#" class="header">贾坤</a></div>
-                                      </div>
-                                      <div class="item">
-                                          <i class="calendar icon"></i> 2020-02-04
-                                      </div>
-                                      <div class="item">
-                                          <i class="eye icon"></i> 123
-                                      </div>
-                                  </div>
+                  <div class="ui violet segment">
+                      <div class="ui fluid vertical menu" >
+
+                          <div class="ui styled accordion">
+                              <div class="title">
+                                  <i class="dropdown icon"></i>
+                                  經部 (<span th:text="${#arrays.length(books1)}"></span>)
                               </div>
-                              <div class="right aligned five wide column">
-                                  <a href="#" target="_blank" class="ui violet basic label m-padded-mini m-text-thin">认知升级</a>
+                              <div class="content">
+                                  <a href="#" th:href="@{/types/{id}(id=${type.id})}" class="item" th:each="type : ${type1}">
+                                      <span th:text="${type.name}">詩類</span>
+                                      <div class="ui violet basic left pointing label" th:text="${#arrays.length(type.books)}">13</div>
+                                  </a>
+                                  <!--/*-->
+                                  <a href="#" class="item">詩類
+                                      <div class="ui violet basic left pointing label">13</div>
+                                  </a>
+                                  <a href="#" class="item">樂類
+                                      <div class="ui violet basic left pointing label">13</div>
+                                  </a>
+                                  <a href="#" class="item">四書類
+                                      <div class="ui violet basic left pointing label">13</div>
+                                  </a>
+                                  <!--*/-->
+                              </div>
+
+
+                              <div class="title">
+                                  <i class="dropdown icon"></i>
+                                  史部 (<span th:text="${#arrays.length(books2)}"></span>)
+                              </div>
+                              <div class="content">
+                                  <a href="#" th:href="@{/types/{id}(id=${type.id})}" class="item" th:each="type : ${type2}">
+                                      <span th:text="${type.name}">詩類</span>
+                                      <div class="ui violet basic left pointing label" th:text="${#arrays.length(type.books)}">13</div>
+                                  </a>
+
+                              </div>
+                              <div class="title">
+                                  <i class="dropdown icon"></i>
+                                  子部 (<span th:text="${#arrays.length(books3)}"></span>)
+                              </div>
+                              <div class="content">
+                                  <a href="#" th:href="@{/types/{id}(id=${type.id})}" class="item" th:each="type : ${type3}">
+                                      <span th:text="${type.name}">詩類</span>
+                                      <div class="ui violet basic left pointing label" th:text="${#arrays.length(type.books)}">13</div>
+                                  </a>
+
+                              </div>
+                              <div class="title">
+                                  <i class="dropdown icon"></i>
+                                  集部 (<span th:text="${#arrays.length(books4)}"></span>)
+                              </div>
+                              <div class="content">
+                                  <a href="#" th:href="@{/types/{id}(id=${type.id})}" class="item" th:each="type : ${type4}">
+                                      <span th:text="${type.name}">詩類</span>
+                                      <div class="ui violet basic left pointing label" th:text="${#arrays.length(type.books)}">13</div>
+                                  </a>
+
+                              </div>
+                              <div class="title">
+                                  <i class="dropdown icon"></i>
+                                  叢書部 (<span th:text="${#arrays.length(books5)}"></span>)
+                              </div>
+                              <div class="content">
+                                  <a href="#" th:href="@{/types/{id}(id=${type.id})}" class="item" th:each="type : ${type5}">
+                                      <span th:text="${type.name}">詩類</span>
+                                      <div class="ui violet basic left pointing label" th:text="${#arrays.length(type.books)}">13</div>
+                                  </a>
+
                               </div>
                           </div>
-                      </div>
-                      <div class="five wide column">
-                          <a href="#" target="_blank">
-                              <img src="https://picsum.photos/id/1002/800/450" alt="" class="ui rounded image">
-                          </a>
+
+
                       </div>
                   </div>
               </div>
-              <div class="ui m-padded vertical segment m-padded-tb-large m-mobile-clear">
-                  <div class="ui mobile reversed stackable grid">
-                      <div class="eleven wide column">
-                          <h3 class="ui header">你真的理解什么是财富自由吗？</h3>
-                          <p class="m-text">在你决定踏上财富自由的路之前，你要先想清楚，这件事真正的意义是什么；如果你真的“想要”财富自由，那么你就需要理解“财富自由”，直到你把这个概念理解得像吃饭睡觉一样透彻之后，你才有了可以加速向它靠近的前提</p>
-                          <div class="ui stackable grid">
-                              <div class="eleven wide column">
-                                  <div class="ui mimi horizontal link list">
-                                      <div class="item">
-                                          <img src="https://picsum.photos/id/1002/100/100" alt="" class="ui avatar image">
-                                          <div class="content"><a href="#" class="header">贾坤</a></div>
-                                      </div>
-                                      <div class="item">
-                                          <i class="calendar icon"></i> 2020-02-04
-                                      </div>
-                                      <div class="item">
-                                          <i class="eye icon"></i> 123
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="right aligned five wide column">
-                                  <a href="#" target="_blank" class="ui violet basic label m-padded-mini m-text-thin">认知升级</a>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="five wide column">
-                          <a href="#" target="_blank">
-                              <img src="https://picsum.photos/id/1002/800/450" alt="" class="ui rounded image">
-                          </a>
-                      </div>
-                  </div>
+
+
               </div>
-              <div class="ui m-padded vertical segment m-padded-tb-large m-mobile-clear">
-                  <div class="ui mobile reversed stackable grid">
-                      <div class="eleven wide column">
-                          <h3 class="ui header">你真的理解什么是财富自由吗？</h3>
-                          <p class="m-text">在你决定踏上财富自由的路之前，你要先想清楚，这件事真正的意义是什么；如果你真的“想要”财富自由，那么你就需要理解“财富自由”，直到你把这个概念理解得像吃饭睡觉一样透彻之后，你才有了可以加速向它靠近的前提</p>
-                          <div class="ui stackable grid">
-                              <div class="eleven wide column">
-                                  <div class="ui mimi horizontal link list">
-                                      <div class="item">
-                                          <img src="https://picsum.photos/id/1002/100/100" alt="" class="ui avatar image">
-                                          <div class="content"><a href="#" class="header">贾坤</a></div>
-                                      </div>
-                                      <div class="item">
-                                          <i class="calendar icon"></i> 2020-02-04
-                                      </div>
-                                      <div class="item">
-                                          <i class="eye icon"></i> 123
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="right aligned five wide column">
-                                  <a href="#" target="_blank" class="ui violet basic label m-padded-mini m-text-thin">认知升级</a>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="five wide column">
-                          <a href="#" target="_blank">
-                              <img src="https://picsum.photos/id/1002/800/450" alt="" class="ui rounded image">
-                          </a>
-                      </div>
-                  </div>
-              </div>
-              <div class="ui m-padded vertical segment m-padded-tb-large m-mobile-clear">
-                  <div class="ui mobile reversed stackable grid">
-                      <div class="eleven wide column">
-                          <h3 class="ui header">你真的理解什么是财富自由吗？</h3>
-                          <p class="m-text">在你决定踏上财富自由的路之前，你要先想清楚，这件事真正的意义是什么；如果你真的“想要”财富自由，那么你就需要理解“财富自由”，直到你把这个概念理解得像吃饭睡觉一样透彻之后，你才有了可以加速向它靠近的前提</p>
-                          <div class="ui stackable grid">
-                              <div class="eleven wide column">
-                                  <div class="ui mimi horizontal link list">
-                                      <div class="item">
-                                          <img src="https://picsum.photos/id/1002/100/100" alt="" class="ui avatar image">
-                                          <div class="content"><a href="#" class="header">贾坤</a></div>
-                                      </div>
-                                      <div class="item">
-                                          <i class="calendar icon"></i> 2020-02-04
-                                      </div>
-                                      <div class="item">
-                                          <i class="eye icon"></i> 123
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="right aligned five wide column">
-                                  <a href="#" target="_blank" class="ui violet basic label m-padded-mini m-text-thin">认知升级</a>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="five wide column">
-                          <a href="#" target="_blank">
-                              <img src="https://picsum.photos/id/1002/800/450" alt="" class="ui rounded image">
-                          </a>
-                      </div>
-                  </div>
-              </div>
-               -->
+
           </div>
-          <div class="ui bottom attached segment" th:if="${page.totalPages}>1">
-              <div class="ui middle aligned two column grid">
-                  <div class="column">
-                      <a href="#" th:href="@{/(page=${page.number}-1)}" th:unless="${page.first}" class="ui mini violet basic button">上一页</a>
-                  </div>
-                  <div class="right aligned column">
-                      <a href="#" th:href="@{/(page=${page.number}+1)}" th:unless="${page.last}" class="ui mini violet basic button">下一页</a>
-                  </div>
-              </div>
-          </div>
+      </div>
+
+
       </div>
   </div>
   <br>
@@ -319,6 +259,7 @@
           $('.m-item').toggleClass('m-mobile-hide');
       });
 
+      $('.ui.accordion').accordion();
   </script>
 </body>
 </html>

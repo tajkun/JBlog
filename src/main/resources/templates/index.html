@@ -40,7 +40,7 @@
       <div class="ui container">
         <div class="ui stackable grid">
            <!-- 左边博客列表 -->
-           <div class="eleven wide column">
+           <div class="eleven wide column active">
                <!-- header -->
                <div class="ui top attached segment">
                    <div class="ui middle aligned two column grid">
@@ -70,34 +70,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--/*-->
-                            <div class="five wide column">
-                                <div class="ui card" >
-                                    <a class="image" href="card.php#">
-                                        <img src="https://picsum.photos/id/1/480/650">
-                                    </a>
-                                    <div class="content ">
-                                        <a class="header" href="card.php#">Steve Jobes</a>
-                                        <div class="meta">
-                                            <a>Last Seen 2 days ago</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="five wide column">
-                                <div class="ui card" >
-                                    <a class="image" href="card.php#">
-                                        <img src="https://picsum.photos/id/1/480/650">
-                                    </a>
-                                    <div class="content ">
-                                        <a class="header" href="card.php#">Steve Jobes</a>
-                                        <div class="meta">
-                                            <a>Last Seen 2 days ago</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--*/-->
 
                         </div>
                     </div>
@@ -106,8 +78,8 @@
 
                </div>
 
-               <!-- bottom -->
-               <div class="ui bottom attached segment" th:if="${page.totalPages}>1">
+               <!-- bottom页码 -->
+               <div class="ui bottom attached segment" th:if="${bookPage.totalPages}>1">
                    <div class="ui middle aligned two column grid">
                        <div class="column">
                            <a href="#" th:href="@{/(page=${page.number}-1)}" th:unless="${page.first}" class="ui mini violet basic button">上一页</a>
@@ -118,7 +90,6 @@
                    </div>
                </div>
            </div>
-
 
 
            <!-- 右边布局 -->
@@ -145,10 +116,10 @@
                             <div class="ui styled accordion">
                                 <div class="title">
                                     <i class="dropdown icon"></i>
-                                    經部
+                                    經部 (<span th:text="${#arrays.length(books1)}"></span>)
                                 </div>
                                 <div class="content">
-                                    <a href="#"  data-tab="1" class="item" th:each="type : ${type1}">
+                                    <a href="#" th:href="@{/types/{id}(id=${type.id})}" target="_blank" class="item" th:each="type : ${type1}">
                                         <span th:text="${type.name}">詩類</span>
                                         <div class="ui violet basic left pointing label" th:text="${#arrays.length(type.books)}">13</div>
                                     </a>
@@ -168,7 +139,7 @@
 
                                 <div class="title">
                                     <i class="dropdown icon"></i>
-                                    史部
+                                    史部 (<span th:text="${#arrays.length(books2)}"></span>)
                                 </div>
                                 <div class="content">
                                     <a href="#" th:href="@{/types/{id}(id=${type.id})}" class="item" th:each="type : ${type2}">
@@ -179,7 +150,7 @@
                                 </div>
                                 <div class="title">
                                     <i class="dropdown icon"></i>
-                                    子部
+                                    子部 (<span th:text="${#arrays.length(books3)}"></span>)
                                 </div>
                                 <div class="content">
                                     <a href="#" th:href="@{/types/{id}(id=${type.id})}" class="item" th:each="type : ${type3}">
@@ -190,7 +161,7 @@
                                 </div>
                                 <div class="title">
                                     <i class="dropdown icon"></i>
-                                    集部
+                                    集部 (<span th:text="${#arrays.length(books4)}"></span>)
                                 </div>
                                 <div class="content">
                                     <a href="#" th:href="@{/types/{id}(id=${type.id})}" class="item" th:each="type : ${type4}">
@@ -201,7 +172,7 @@
                                 </div>
                                 <div class="title">
                                     <i class="dropdown icon"></i>
-                                    叢書部
+                                    叢書部 (<span th:text="${#arrays.length(books5)}"></span>)
                                 </div>
                                 <div class="content">
                                     <a href="#" th:href="@{/types/{id}(id=${type.id})}" class="item" th:each="type : ${type5}">

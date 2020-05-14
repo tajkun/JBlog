@@ -2,6 +2,7 @@ package com.jk.blog.service;
 
 import com.jk.blog.dao.BookRepository;
 import com.jk.blog.po.Book;
+import com.jk.blog.po.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -39,8 +40,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Page<Book> listBook(Long typeId, Pageable pageable) {
-        return bookRepository.findByType(typeId, pageable);
+    public Page<Book> listBookByType(Type type, Pageable pageable) {
+        return bookRepository.findAllByType(type, pageable);
     }
 
     @Override
