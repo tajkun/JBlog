@@ -43,6 +43,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public Page<Book> listBookByViews(Pageable pageable) {
+        return bookRepository.findBookByViewQuery(pageable);
+    }
+
+    @Override
     public Page<Book> listBookByType(Type type, Pageable pageable) {
         return bookRepository.findAllByType(type, pageable);
     }

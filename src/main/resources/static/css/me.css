@@ -9,6 +9,11 @@ body{
     padding-top: 0.5em !important;
     padding-bottom: 0.5em !important;
 }
+.m-padded-tb-tiny-nav {
+    padding-top: 0.8em !important;
+    padding-bottom: 0.8em !important;
+    top: 0 !important;
+}
 .m-padded-tb{
     padding-top: 2em !important;
     padding-bottom: 2em !important;
@@ -63,6 +68,10 @@ pre {
     font-weight: 300 !important;
     letter-spacing: 1px !important;
     line-height: 1.8;
+}
+.m-text-article-title{
+    font-weight: 900 !important;
+    color: #1A1A17;
 }
 .m-text-book-des{
     font-weight: 300 !important;
@@ -129,12 +138,26 @@ pre {
 .m-teal{
     color: #00B5AD !important;
 }
+.m-red{
+    color: #B03060 !important;
+}
 
 
 /*shadow*/
 .m-shadow-small{
     -webkit-box-shadow: 0 4px 8px rgba(0,0,0,0.2) !important;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2) !important;
+}
+
+.box{
+    position: relative;
+    height: 80px;
+    width: 100%;
+    z-index: 999;
+}
+.box-active{
+    position: fixed;
+    top: 0;
 }
 
 /*margin*/
@@ -164,6 +187,9 @@ pre {
 
 .m-margin-l-tiny{
     margin-left: 1em !important;
+}
+.m-margin-search{
+    margin-left: 12em !important;
 }
 
 

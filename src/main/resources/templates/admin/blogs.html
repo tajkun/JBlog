@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <!--  移动端适配  -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>博客管理</title>
+    <title>文章管理</title>
     <!--  cdn方式引入semantic UI  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
     <!-- 引入自定义的css -->
@@ -101,7 +101,7 @@
                   <tr th:each="blog,iterStat : ${page.content}">
                       <td th:text="${iterStat.count}">1</td>
                       <td ><a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" th:text="${blog.title}">刻意练习清单</a></td>
-                      <td th:text="${blog.type.name}">认知升级</td>
+                      <td th:text="${blog.book.title}">认知升级</td>
                       <td th:text="${blog.recommend} ? '是' : '否'">是</td>
                       <td th:text="${blog.published} ? '发布' : '草稿'">是</td>
                       <td th:text="${#dates.format(blog.updateTime, 'yyyy-MM-dd HH:mm')}">2017-10-02 09：32</td>

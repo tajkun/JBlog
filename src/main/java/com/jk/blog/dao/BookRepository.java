@@ -6,6 +6,7 @@ import com.jk.blog.po.Type;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
  * @author: Jiakun
  * @create: 2020-05-12 14:10
  **/
-public interface BookRepository extends JpaRepository<Book,Long> {
+public interface BookRepository extends JpaRepository<Book,Long>, JpaSpecificationExecutor<Blog> {
 
     Book findByTitle(String title);
 
@@ -33,5 +34,8 @@ public interface BookRepository extends JpaRepository<Book,Long> {
 
     @Query("select b from Book b where b.title like ?1")
     Page<Book> findBookByQuery(String query, Pageable pageable);
+
+    @Query("select b from Book b ORDER BY b.views DESC")
+    Page<Book> findBookByViewQuery(Pageable pageable);
 
 }

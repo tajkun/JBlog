@@ -9,14 +9,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
     <!-- 引入自定义的css -->
     <link rel="stylesheet" href="../static/css/me.css">
+
 </head>
 <body>
 
   <!-- 导航 -->
-  <nav th:replace="_fragments :: menu(1)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+<!--  <div id="toolbar">-->
+  <nav th:replace="_fragments :: menu(1)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small m-nav-fixed">
       <div class="ui container">
         <div class="ui inverted secondary stackable menu">
-          <h2 class="ui violet header item">Blog</h2>
+          <h2 class="ui red header item">Blog</h2>
           <a href="#" class="m-item item m-mobile-hide"><i class=" home icon"></i>首页</a>
           <a href="#" class="m-item item m-mobile-hide"><i class=" idea icon"></i>分类</a>
           <a href="#" class="m-item item m-mobile-hide"><i class=" tags icon"></i>标签</a>
@@ -34,9 +36,10 @@
           <i class="sidebar icon"></i>
       </a>
   </nav>
+<!--  </div>-->
 
   <!-- 中间内容 -->
-  <div class="m-container m-padded-tb-huge animated fadeIn">
+  <div class="m-container m-padded-tb-huge animated fadeIn m-middle">
       <div class="ui container">
         <div class="ui stackable grid">
            <!-- 左边博客列表 -->
@@ -45,10 +48,10 @@
                <div class="ui top attached segment">
                    <div class="ui middle aligned two column grid">
                        <div class="column">
-                           <h3 class="ui violet header">已上架书籍</h3>
+                           <h3 class="ui red header" >已上架书籍</h3>
                        </div>
                        <div class="right aligned column">
-                           共<h2 class="ui orange header m-inline-block m-text-thin" th:text="${bookPage.totalElements}">14</h2>本
+                           共 &nbsp;<h2 class="ui red header m-inline-block m-text-thin" th:text="${bookPage.totalElements}">14</h2>&nbsp;&nbsp;本
                        </div>
                    </div>
                </div>
@@ -58,9 +61,14 @@
                    <div class="ui vertical segment " >
                         <div class="ui middle aligned mobile reversed stackable grid"  >
                             <div class="five wide column" th:each="book : ${bookPage.content}">
-                                <div class="ui card" >
-                                    <a class="image" href="card.php#" th:href="@{/book/{id}(id=${book.id})}">
-                                        <img src="https://picsum.photos/id/1/480/640" th:src="@{${book.picture}}">
+                                <div class="ui raised card " >
+                                    <a class="image " href="#" th:href="@{/book/{id}(id=${book.id})}">
+                                        <object>
+                                        <a class="ui left corner label" >
+                                            <i class="bookmark icon"></i>
+                                        </a>
+                                        </object>
+                                        <img src="https://picsum.photos/id/1/480/640" th:src="@{${book.picture}}" style="height: 240px; width: 186px">
                                     </a>
                                     <div class="content">
                                         <a class="header" href="#" th:text="${book.title}">Steve Jobes</a>
@@ -74,18 +82,16 @@
                         </div>
                     </div>
 
-
-
                </div>
 
                <!-- bottom页码 -->
                <div class="ui bottom attached segment" th:if="${bookPage.totalPages}>1">
                    <div class="ui middle aligned two column grid">
                        <div class="column">
-                           <a href="#" th:href="@{/(page=${page.number}-1)}" th:unless="${page.first}" class="ui mini violet basic button">上一页</a>
+                           <a href="#" th:href="@{/(page=${bookPage.number}-1)}" th:unless="${bookPage.first}" class="ui mini red basic button">上一页</a>
                        </div>
                        <div class="right aligned column">
-                           <a href="#" th:href="@{/(page=${page.number}+1)}" th:unless="${page.last}" class="ui mini violet basic button">下一页</a>
+                           <a href="#" th:href="@{/(page=${bookPage.number}+1)}" th:unless="${bookPage.last}" class="ui mini red basic button">下一页</a>
                        </div>
                    </div>
                </div>
@@ -99,18 +105,18 @@
                     <div class="ui secondary segment">
                         <div class="ui two column grid">
                             <div class="column">
-                                <i class="idea icon"></i><span class="m-text-color">古籍分类</span>
+                                <i class="book icon"></i><span class="m-red">古籍分类</span>
                             </div>
                             <div class="right aligned column">
-                                <a href="#" th:href="@{types/-1}" target="_blank" > <span class="m-text-color">more</span> <i class="angle double right violet icon"></i></a>
+                                <a href="#" th:href="@{types/-1}" target="_blank" > <span class="m-red">more</span> <i class="angle double right red icon"></i></a>
                             </div>
                         </div>
                     </div>
-                    <div class="ui violet segment">
+                    <div class="ui red segment">
                         <div class="ui fluid vertical menu" >
 <!--                            <a href="#" th:href="@{/types/{id}(id=${type.id})}" target="_blank" class="item" th:each="type : ${types}">-->
 <!--                                <span th:text="${type.name}">学习日志</span>-->
-<!--                                <div class="ui violet basic left pointing label" th:text="${#arrays.length(type.blogs)}">13</div>-->
+<!--                                <div class="ui red basic left pointing label" th:text="${#arrays.length(type.blogs)}">13</div>-->
 <!--                            </a>-->
 
                             <div class="ui styled accordion">
@@ -121,17 +127,17 @@
                                 <div class="content">
                                     <a href="#" th:href="@{/types/{id}(id=${type.id})}" target="_blank" class="item" th:each="type : ${type1}">
                                         <span th:text="${type.name}">詩類</span>
-                                        <div class="ui violet basic left pointing label" th:text="${#arrays.length(type.books)}">13</div>
+                                        <div class="ui red basic left pointing label" th:text="${#arrays.length(type.books)}">13</div>
                                     </a>
                                     <!--/*-->
                                     <a href="#" class="item">詩類
-                                        <div class="ui violet basic left pointing label">13</div>
+                                        <div class="ui red basic left pointing label">13</div>
                                     </a>
                                     <a href="#" class="item">樂類
-                                        <div class="ui violet basic left pointing label">13</div>
+                                        <div class="ui red basic left pointing label">13</div>
                                     </a>
                                     <a href="#" class="item">四書類
-                                        <div class="ui violet basic left pointing label">13</div>
+                                        <div class="ui red basic left pointing label">13</div>
                                     </a>
                                     <!--*/-->
                                 </div>
@@ -144,7 +150,7 @@
                                 <div class="content">
                                     <a href="#" th:href="@{/types/{id}(id=${type.id})}" class="item" th:each="type : ${type2}">
                                         <span th:text="${type.name}">詩類</span>
-                                        <div class="ui violet basic left pointing label" th:text="${#arrays.length(type.books)}">13</div>
+                                        <div class="ui red basic left pointing label" th:text="${#arrays.length(type.books)}">13</div>
                                     </a>
 
                                 </div>
@@ -155,7 +161,7 @@
                                 <div class="content">
                                     <a href="#" th:href="@{/types/{id}(id=${type.id})}" class="item" th:each="type : ${type3}">
                                         <span th:text="${type.name}">詩類</span>
-                                        <div class="ui violet basic left pointing label" th:text="${#arrays.length(type.books)}">13</div>
+                                        <div class="ui red basic left pointing label" th:text="${#arrays.length(type.books)}">13</div>
                                     </a>
 
                                 </div>
@@ -166,7 +172,7 @@
                                 <div class="content">
                                     <a href="#" th:href="@{/types/{id}(id=${type.id})}" class="item" th:each="type : ${type4}">
                                         <span th:text="${type.name}">詩類</span>
-                                        <div class="ui violet basic left pointing label" th:text="${#arrays.length(type.books)}">13</div>
+                                        <div class="ui red basic left pointing label" th:text="${#arrays.length(type.books)}">13</div>
                                     </a>
 
                                 </div>
@@ -177,7 +183,7 @@
                                 <div class="content">
                                     <a href="#" th:href="@{/types/{id}(id=${type.id})}" class="item" th:each="type : ${type5}">
                                         <span th:text="${type.name}">詩類</span>
-                                        <div class="ui violet basic left pointing label" th:text="${#arrays.length(type.books)}">13</div>
+                                        <div class="ui red basic left pointing label" th:text="${#arrays.length(type.books)}">13</div>
                                     </a>
 
                                 </div>
@@ -193,25 +199,25 @@
                     <div class="ui secondary segment">
                         <div class="ui two column grid">
                             <div class="column">
-                                <i class="tags icon"></i><span class="m-text-color">文章标签</span>
+                                <i class="tags icon"></i><span class="m-red">文章标签</span>
                             </div>
                             <div class="right aligned column">
-                                <a href="#" th:href="@{/tags/-1}" target="_blank"><span class="m-text-color">more</span> <i class="angle double right violet icon"></i></a>
+                                <a href="#" th:href="@{/tags/-1}" target="_blank"><span class="m-red">more</span> <i class="angle double right red icon"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="ui segment">
                         <a href="#" th:href="@{/tags/{id}(id=${tag.id})}" target="_blank" class="ui tag label m-tag-color m-margin-tb-tiny m-margin-l-mini" th:each="tag : ${tags}">
-                            <span th:text="${tag.name}" class="m-text-color">方法论</span>
+                            <span th:text="${tag.name}" class="m-red">方法论</span>
                             <div class="detail" th:text="${#arrays.length(tag.blogs)}"><span>23</span></div>
                         </a>
                         <!--/*-->
-                        <a href="#" target="_blank" class="ui violet basic left pointing label m-margin-tb-tiny">方法论 <div class="detail">23</div></a>
-                        <a href="#" target="_blank" class="ui violet basic left pointing label m-margin-tb-tiny">方法论 <div class="detail">23</div></a>
-                        <a href="#" target="_blank" class="ui violet basic left pointing label m-margin-tb-tiny">方法论 <div class="detail">23</div></a>
-                        <a href="#" target="_blank" class="ui violet basic left pointing label m-margin-tb-tiny">方法论 <div class="detail">23</div></a>
-                        <a href="#" target="_blank" class="ui violet basic left pointing label m-margin-tb-tiny">方法论 <div class="detail">23</div></a>
-                        <a href="#" target="_blank" class="ui violet basic left pointing label m-margin-tb-tiny">方法论 <div class="detail">23</div></a>
+                        <a href="#" target="_blank" class="ui red basic left pointing label m-margin-tb-tiny">方法论 <div class="detail">23</div></a>
+                        <a href="#" target="_blank" class="ui red basic left pointing label m-margin-tb-tiny">方法论 <div class="detail">23</div></a>
+                        <a href="#" target="_blank" class="ui red basic left pointing label m-margin-tb-tiny">方法论 <div class="detail">23</div></a>
+                        <a href="#" target="_blank" class="ui red basic left pointing label m-margin-tb-tiny">方法论 <div class="detail">23</div></a>
+                        <a href="#" target="_blank" class="ui red basic left pointing label m-margin-tb-tiny">方法论 <div class="detail">23</div></a>
+                        <a href="#" target="_blank" class="ui red basic left pointing label m-margin-tb-tiny">方法论 <div class="detail">23</div></a>
                         <!--*/-->
                     </div>
                 </div>
@@ -219,9 +225,9 @@
                 <!-- 最新推荐 -->
                 <div class="ui segments m-margin-top-large">
                     <div class="ui secondary segment">
-                        <i class="bookmark icon"></i><span class="m-text-color">最新推荐</span>
+                        <i class="bookmark icon"></i><span class="m-red">最新推荐</span>
                     </div>
-                    <div class="ui fluid vertical menu violet segment" >
+                    <div class="ui fluid vertical menu red segment" >
 <!--                        <div  class="item" th:each="book : ${recommendBooks}">-->
 <!--                            <a href="#" th:href="@{/book/{id}(id=${book.id})}" target="_blank" class="item m-black m-text-thin" th:text="${book.title}">用户故事（User Story）-->
 <!--                            </a>-->
@@ -332,8 +338,17 @@
       $('.ui.accordion').accordion();
 
       $('.content .item')
-          .tab()
-      ;
+          .tab();
+
+      // 监听事件
+      window.addEventListener('scroll', function(){
+          let t = $('body, html').scrollTop();   // 目前监听的是整个body的滚动条距离
+          if(t>0){
+              $('.box').addClass('box-active')
+          }else{
+              $('.box').removeClass('box-active')
+          }
+      });
   </script>
 </body>
 </html>

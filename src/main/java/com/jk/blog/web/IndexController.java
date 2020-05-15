@@ -45,9 +45,9 @@ public class IndexController {
     }
 
     @GetMapping("/")
-    public String index(@PageableDefault(size = 6, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
+    public String index(@PageableDefault(size = 9, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
                         BlogQuery blog, Model model){
-        model.addAttribute("page",blogService.listBlog(pageable));
+//        model.addAttribute("page",blogService.listBlog(pageable));
         model.addAttribute("bookPage", bookService.listBook(pageable));
         // 经部
         List<Type> types1 = typeService.listTypeTop(7);
@@ -102,6 +102,7 @@ public class IndexController {
     @GetMapping("/footer/newblog")
     public String newblogs(Model model) {
         model.addAttribute("newblogs", blogService.listRecommendBlogTop(3));
+        model.addAttribute("newBooks", bookService.listRecommendBookTop(4));
         return "_fragments :: newblogList";
     }
 

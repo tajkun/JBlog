@@ -44,9 +44,9 @@
               &nbsp;&nbsp;&nbsp;&nbsp;共  &nbsp;<span class="ui header" th:text="${bookPage.totalElements}">14</span>&nbsp;&nbsp;条搜索结果
           </h4>
           <br>
-          <div class="ui stackable grid">
+          <div class="ui stackable grid ">
               <!-- 左边博客列表 -->
-              <div class="eleven wide column active">
+              <div class="eleven wide column active m-margin-search">
                   <!-- header -->
 <!--                  <div class="ui top attached segment">-->
 <!--                      <div class="ui middle aligned two column grid">-->
@@ -66,6 +66,11 @@
                               <div class="five wide column" th:each="book : ${bookPage.content}">
                                   <div class="ui card" >
                                       <a class="image" href="#" th:href="@{/book/{id}(id=${book.id})}">
+                                          <object>
+                                              <a class="ui left corner label" >
+                                                  <i class="bookmark icon"></i>
+                                              </a>
+                                          </object>
                                           <img src="https://picsum.photos/id/1/480/640" th:src="@{${book.picture}}">
                                       </a>
                                       <div class="content">

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <!--  移动端适配  -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>标签</title>
+    <title>文章标签</title>
     <!--  cdn方式引入semantic UI  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
     <!-- 引入自定义的css -->
@@ -16,7 +16,7 @@
   <nav th:replace="_fragments :: menu(3)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
       <div class="ui container">
         <div class="ui inverted secondary stackable menu">
-          <h2 class="ui violet header item">Blog</h2>
+          <h2 class="ui red header item">Blog</h2>
           <a href="#" class="m-item item m-mobile-hide"><i class=" home icon"></i>首页</a>
           <a href="#" class="m-item item m-mobile-hide"><i class=" idea icon"></i>分类</a>
           <a href="#" class="active  m-item item m-mobile-hide"><i class=" tags icon"></i>标签</a>
@@ -46,7 +46,7 @@
 <!--          <div class="ui top attached segment">-->
 <!--              <div class="ui middle aligned two column grid">-->
 <!--                  <div class="column">-->
-<!--                      <h3 class="ui violet header">标 签</h3>-->
+<!--                      <h3 class="ui red header">标 签</h3>-->
 <!--                  </div>-->
 <!--                  <div class="right aligned column">-->
 <!--                      共 <h2 class="ui orange header m-inline-block m-text-thin" th:text="${#arrays.length(tags)}">14</h2> 个-->
@@ -54,14 +54,14 @@
 <!--              </div>-->
 <!--          </div>-->
           <div class="ui attached m-padded-tb-large">
-              <a href="#" th:href="@{/tags/{id}(id=${tag.id})}" class="ui tag label m-margin-tb-tiny m-margin-l-mini" th:classappend="${tag.id==activeTagId} ? 'violet'" th:each="tag : ${tags}">
+              <a href="#" th:href="@{/tags/{id}(id=${tag.id})}" class="ui tag label m-margin-tb-tiny m-margin-l-mini" th:classappend="${tag.id==activeTagId} ? 'red'" th:each="tag : ${tags}">
                   <span th:text="${tag.name}">方法论</span>
                   <div th:text="${#arrays.length(tag.blogs)}" class="detail">23</div>
               </a>
 
           </div>
 
-          <div class="ui violet top attached segment">
+          <div class="ui red top attached segment">
               <div class="ui padded vertical segment m-padded-tb-large" th:each="blog : ${page.content}">
                   <div class="ui middle aligned mobile reversed stackable grid" >
                       <div class="eleven wide column">
@@ -90,12 +90,12 @@
                                       </div>
                                   </div>
 <!--                                  <div class="right aligned five wide column">-->
-<!--                                      <a href="#" target="_blank" class="ui violet label m-padded-tiny m-text-thin" th:text="${blog.book.title}">认知升级</a>-->
+<!--                                      <a href="#" target="_blank" class="ui red label m-padded-tiny m-text-thin" th:text="${blog.book.title}">认知升级</a>-->
 <!--                                  </div>-->
                               </div>
                               <div class="row">
                                   <div class="column">
-                                      <a href="" th:href="@{/tags/{id}(id=${tag.id})}" class="ui left pointing label m-padded-mini m-text-thin" th:classappend="${tag.id==activeTagId} ? 'violet'" th:each="tag : ${blog.tags}" th:text="${tag.name}">方法论</a>
+                                      <a href="" th:href="@{/tags/{id}(id=${tag.id})}" class="ui left pointing label m-padded-mini m-text-thin" th:classappend="${tag.id==activeTagId} ? 'red'" th:each="tag : ${blog.tags}" th:text="${tag.name}">方法论</a>
                                   </div>
                               </div>
 
@@ -115,10 +115,10 @@
           <div class="ui bottom attached segment" th:if="${page.totalPages}>1">
               <div class="ui middle aligned two column grid">
                   <div class="column">
-                      <a href="#" th:href="@{/(page=${page.number}-1)}" th:unless="${page.first}" class="ui mini violet basic button">上一页</a>
+                      <a href="#" th:href="@{/(page=${page.number}-1)}" th:unless="${page.first}" class="ui mini red basic button">上一页</a>
                   </div>
                   <div class="right aligned column">
-                      <a href="#" th:href="@{/(page=${page.number}+1)}" th:unless="${page.last}" class="ui mini violet basic button">下一页</a>
+                      <a href="#" th:href="@{/(page=${page.number}+1)}" th:unless="${page.last}" class="ui mini red basic button">下一页</a>
                   </div>
               </div>
           </div>

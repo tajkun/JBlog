@@ -40,22 +40,25 @@ public class TypeShowController {
 
     @GetMapping("/types/{id}")
     public String types(@PageableDefault(size = 6, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
-                        @PathVariable Long id, Model model) {
+                        @PathVariable String id, Model model) {
+        Long longId = Long.parseLong(id);
         List<Type> types = typeService.listTypeTop(10000);
         String typeName = null;
-        if (id == -1) {
+        if (longId == -1) {
             typeName = "阅读排行";
             model.addAttribute("typeStr", typeName);
             model.addAttribute("types",types);
-            model.addAttribute("bookPage", bookService.listBook(pageable));
+            model.addAttribute("bookPage", bookService.listBookByViews(pageable));
+            model.addAttribute("typeId", longId);
             this.typeRelative(model);
             return "types";
         } else {
-            Type type = typeService.getType(id);
+            Type type = typeService.getType(longId);
             typeName = type.getName();
             model.addAttribute("typeStr", typeName);
             model.addAttribute("types", types);
             model.addAttribute("bookPage", bookService.listBookByType(type, pageable));
+            model.addAttribute("typeId", longId);
             this.typeRelative(model);
             return "types";
         }

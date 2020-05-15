@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <!--  移动端适配  -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>归档</title>
+    <title>上架归档</title>
     <!--  cdn方式引入semantic UI  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
     <!-- 引入自定义的css -->
@@ -52,7 +52,7 @@
                       <span class="m-text-book-des" th:text="${book.author}"></span>
                       <div class="ui violet basic left pointing label m-padded-mini" th:text="${#dates.format(book.updateTime,'MMMdd')}">9月03</div>
                   </span>
-                  <div class="ui orange basic left pointing label m-padded-mini" th:text="${book.type.name}">分类</div>
+                  <div class="ui red basic left pointing label m-padded-mini" th:text="${book.type.name}">分类</div>
               </a>
 
           </div>

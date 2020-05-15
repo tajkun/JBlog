@@ -23,6 +23,8 @@ public interface BookService {
 
     Page<Book> listBook(Pageable pageable);
 
+    Page<Book> listBookByViews(Pageable pageable);
+
     Page<Book> listBookByType(Type type, Pageable pageable);
 //    Page<Book> listBook(String query,Pageable pageable);
 

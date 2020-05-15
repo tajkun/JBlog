@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <!--  移动端适配  -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>博客详情</title>
+    <title>文章详情</title>
     <!--  cdn方式引入semantic UI  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
     <!-- 引入typo.css -->
@@ -24,7 +24,7 @@
   <nav th:replace="_fragments :: menu(1)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
       <div class="ui container">
         <div class="ui inverted secondary stackable menu">
-          <h2 class="ui violet header item">Blog</h2>
+          <h2 class="ui red header item">Blog</h2>
           <a href="#" class="m-item item m-mobile-hide"><i class=" home icon"></i>首页</a>
           <a href="#" class="m-item item m-mobile-hide"><i class=" idea icon"></i>分类</a>
           <a href="#" class="m-item item m-mobile-hide"><i class=" tags icon"></i>标签</a>
@@ -46,11 +46,17 @@
   <!-- 中间内容 -->
   <div id="waypoint" class="m-container-small m-padded-tb-huge animated fadeIn">
     <div class="ui container" >
-        <div class="ui top violet attached segment">
+        <div class="ui top red attached segment">
                 <div class="ui horizontal link list">
                     <div class="item">
-                        <img src="https://picsum.photos/id/1002/100/100" th:src="@{${blog.user.avatar}}" alt="" class="ui avatar image">
-                        <div class="content"><a href="#" class="header" th:text="${blog.user.nickname}">贾坤</a></div>
+<!--                        <img src="https://picsum.photos/id/1002/100/100" th:src="@{${blog.user.avatar}}" alt="" class="ui avatar image">-->
+                        <i class="book icon"></i>
+                        <div class="content">选自《
+                            <a href="#" th:href="@{/book/{id}(id=${blog.book.id})}" style="color: #00aaaa" th:text="${blog.book.title}" >书籍</a>》
+                        </div>
+                    </div>
+                    <div class="item">
+                        文章标题 : <span th:text="${blog.title}" class="m-text-article-title">标题</span>
                     </div>
                     <div class="item">
                         最后更新于 <span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2020-02-04</span>
@@ -67,9 +73,9 @@
         </div>
         <div class="ui attached padded segment">
             <!--内容-->
-            <div class="ui right aligned basic segment">
-                <div class="ui orange basic label" th:text="${blog.flag}">原创</div>
-            </div>
+<!--            <div class="ui right aligned basic segment">-->
+<!--                <div class="ui orange basic label" th:text="${blog.flag}">原创</div>-->
+<!--            </div>-->
 
             <h2 class="ui center aligned header" th:text="${blog.title}">关于刻意练习的清单</h2>
             <div id="content" class="js-toc-content typo typo-selection m-padded-lr-responsive m-padded-tb-large" th:utext="${blog.content}">
@@ -432,7 +438,7 @@ h5,h6{font-size:1em;}
             </div>
             <!-- 标签 -->
             <div class="m-padded-lr-responsive">
-                <div class="ui basic violet left pointing label" th:each="tag : ${blog.tags}" th:text="${tag.name}">方法论</div>
+                <div class="ui basic red left pointing label" th:each="tag : ${blog.tags}" th:text="${tag.name}">方法论</div>
             </div>
 
             <!-- 赞赏-->
@@ -475,7 +481,7 @@ h5,h6{font-size:1em;}
         </div>
         <div  class="ui bottom attached segment" th:if="${blog.commentabled}">
         <!-- 留言区域列表-->
-            <div id="comment-container" class="ui violet segment">
+            <div id="comment-container" class="ui red segment">
                 <div th:fragment="commentList">
                     <div class="ui threaded comments"  style="max-width: 100% ">
                         <h3 class="ui dividing header">评论</h3>
@@ -486,7 +492,7 @@ h5,h6{font-size:1em;}
                             <div class="content">
                                 <a class="author" >
                                     <span th:text="${comment.nickname}">Matt</span>
-                                    <div class="ui mini basic violet left pointing label m-padded-mini" th:if="${comment.adminComment}">博主</div>
+                                    <div class="ui mini basic red left pointing label m-padded-mini" th:if="${comment.adminComment}">录入者</div>
                                 </a>
                                 <div class="metadata">
                                     <span class="date" th:text="${#dates.format(comment.createTime,'yyyy-MM-dd :HH:mm')}">Today at 5:42PM</span>
@@ -506,8 +512,8 @@ h5,h6{font-size:1em;}
                                     <div class="content">
                                         <a class="author" >
                                             <span th:text="${reply.nickname}">Matt</span>
-                                            <div class="ui mini basic violet left pointing label m-padded-mini" th:if="${reply.adminComment}">博主</div>
-                                            &nbsp;<span th:text="|@${reply.parentComment.nickname}|" class="m-violet">小白</span>
+                                            <div class="ui mini basic red left pointing label m-padded-mini" th:if="${reply.adminComment}">录入者</div>
+                                            &nbsp;<span th:text="|@${reply.parentComment.nickname}|" class="m-red">小白</span>
                                         </a>
                                         <div class="metadata">
                                             <span class="date" th:text="${#dates.format(reply.createTime,'yyyy-MM-dd :HH:mm')}">Today at 5:42PM</span>
@@ -601,7 +607,7 @@ h5,h6{font-size:1em;}
                         </div>
                     </div>
                     <div class="field m-mobile-wide m-margin-bottom-small">
-                        <button id="commentpost-btn" type="button" class="ui violet button m-mobile-wide"><i class="edit icon"></i>发布</button>
+                        <button id="commentpost-btn" type="button" class="ui red button m-mobile-wide"><i class="edit icon"></i>发布</button>
                     </div>
                  </div>
                 </div>
@@ -611,10 +617,10 @@ h5,h6{font-size:1em;}
 
   <div id="toolbar" class="m-fixed m-right-bottom m-padded-tiny" style="display: none">
       <div class="ui vertical icon buttons">
-          <button type="button" class="ui toc violet button">目录</button>
-          <a href="#comment-container" class="ui violet button">留言</a>
+          <button type="button" class="ui toc red button">目录</button>
+          <a href="#comment-container" class="ui red button">留言</a>
           <button class="ui wechat icon button"><i class="weixin icon"></i></button>
-          <div id="toTop-button" href="#" class="ui violet button"><i class="chevron up icon"></i></div>
+          <div id="toTop-button" href="#" class="ui red button"><i class="chevron up icon"></i></div>
       </div>
   </div>
 
